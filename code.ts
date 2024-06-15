@@ -19,7 +19,9 @@ function extractTexts(nodeObjectsArray) {
         let delimiterKey = settingsData.delimiter ? settingsData.delimiter : defaultSettingsData.delimiter
         texts += delimiter[delimiterKey]
       }
-      texts += nodeObjectsArray[i].characters
+      // Replace Line Separator (LS) and Paragraph Separator (PS) with spaces
+      let textToAdd = nodeObjectsArray[i].characters.replace(/\u2028|\u2029/g, ' ');
+      texts += textToAdd;
       textObjectLength++
     } else if (nodeObjectsArray[i].type == 'GROUP' || nodeObjectsArray[i].type == 'FRAME' || nodeObjectsArray[i].type == 'COMPONENT' || nodeObjectsArray[i].type == 'INSTANCE') {
       texts += extractTexts(nodeObjectsArray[i].children)
