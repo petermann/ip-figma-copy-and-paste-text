@@ -20,7 +20,9 @@ function extractTexts(nodeObjectsArray) {
         texts += delimiter[delimiterKey]
       }
       // Replace Line Separator (LS) and Paragraph Separator (PS) with spaces
-      let textToAdd = nodeObjectsArray[i].characters.replace(/\u2028|\u2029/g, ' ').trim();
+      let textToAdd = nodeObjectsArray[i].characters.replace(/\u2028|\u2029/g, ' ')
+      .replace(/\s+/g, ' ') // Replace multiple spaces with a single space
+      .trim();
       texts += textToAdd;
       textObjectLength++
     } else if (nodeObjectsArray[i].type == 'GROUP' || nodeObjectsArray[i].type == 'FRAME' || nodeObjectsArray[i].type == 'COMPONENT' || nodeObjectsArray[i].type == 'INSTANCE') {
